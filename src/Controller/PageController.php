@@ -84,6 +84,62 @@ class PageController extends AbstractController
 
     public function contact(): Response
     {
+        $page = 'contacts';
+        $devisUrl = $this->devisBg[10];
+        if(!empty($request->request->get('envoyer')))
+        {
+            $page = 'prestations';
+
+            $response;
+            $entityManager = $this->getDoctrine()->getManager();
+            
+            $gfiContactMail = 'contact@gfi-co.net';
+            $senderFullName = $request->request->get('contact-name');
+            $senderMail = $request->request->get('contact-email');
+            $senderContact = $request->request->get('contact-phone');
+            $title = $request->request->get('objet');
+            $content = $request->request->get('contact-messgae');
+
+            try {
+                $email = (new TemplatedEmail())
+                    ->from(new Address($senderMail, $senderFullName))
+                    ->to(new Address($gfiContactMail))
+                    ->subject($title)
+                    ->htmlTemplate('admin/mails/contact-mail.html.twig')
+    
+                    ->context([
+                        'senderFullName' => $senderFullName,
+                        'senderMail' => $senderMail,
+                        'senderContact' => $senderContact,
+                        'title' => $title,
+                        'content' => $content,
+                    ]);
+    
+                $this->mailer->send($email);
+    
+                $mail = new Mail();
+                $mail->setSenderFullName(\strtolower($senderFullName));
+                $mail->setSenderMail(\strtolower($senderMail));
+                $mail->setSenderContact(\strtolower($senderContact));
+                $mail->setTitle(\strtolower($title));
+                $mail->setContent(\strtolower($content));
+    
+                $entityManager->persist($mail);
+                $entityManager->flush();
+    
+                //return $this->json(true, 200);
+                return $this->redirectToRoute('gfi-success-mail', [
+                    'lang' => $lang
+                ]);
+            } catch (\Throwable $th) {
+                $response = $th->getMessage();
+                
+                return $this->redirectToRoute('gfi-error-mail', [
+                    'lang' => $lang,
+                    'page' => $page
+                ]);
+            }
+        }
         return $this->render('page/contact.html.twig', [
             'controller_name' => 'PageController',
         ]);

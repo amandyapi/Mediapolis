@@ -53,7 +53,7 @@ class SecurityController extends AbstractController
                 $user = $this->getDoctrine()
                              ->getRepository(User::class)
                              ->findUser($email, $password);
-                var_dump($user[0]);die();  
+                              
             } catch (\Throwable $th) {
                 $message = $th->getMessage();
                 var_dump($message);die();
