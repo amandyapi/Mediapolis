@@ -52,7 +52,7 @@ class AdminController extends AbstractController
                       ->getRepository(Mail::class)
                       ->findMails();
 
-        $template = 'admin/mail/mails.html.twig';            
+        $template = 'admin/mails/mails.html.twig';            
         return $this->render($template, [
             'mails' => $mails,
             'user' => $user,
@@ -82,7 +82,7 @@ class AdminController extends AbstractController
         //var_dump($mail);die();
         $bgUrl = 'https://images.unsplash.com/photo-1531512073830-ba890ca4eba2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80';
 
-        $template = 'admin/mail/mail.html.twig';            
+        $template = 'admin/mails/mail.html.twig';            
         return $this->render($template, [
             'mail' => $mail,
             'user' => $user,
@@ -143,6 +143,8 @@ class AdminController extends AbstractController
     public function articleEdit($id, SessionInterface $session, Request $request)
     {
         $user = $session->get('user');
+        $fileExist = false;
+
         if($session->get('user') == NULL || $session->get('user') == null) 
         {
             return $this->redirectToRoute('login');
@@ -160,7 +162,15 @@ class AdminController extends AbstractController
         //var_dump($article);die();
         
         $serverName = $_SERVER['SERVER_NAME'];
+
         $bgUrl = "http://".$serverName."/assets/uploads/articles/".$article["picture"];
+
+        if (file_exists($bgUrl)) {
+            $fileExist = true;
+        } else {
+            $fileExist = false;
+            $bgUrl = "http://".$serverName."/assets/images/page-titles/13.jpg";
+        }
 
         $repository = $this->getDoctrine()->getRepository(Article::class);
         if(!empty($request->request->get('save')))

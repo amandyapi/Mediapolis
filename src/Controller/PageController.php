@@ -2,13 +2,42 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Entity\Article;
+use App\Entity\Picture;
+use App\Entity\Mail;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use PhpParser\Node\Stmt\TryCatch;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
+use Symfony\Component\Mime\Address;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Bridge\Twig\Mime\WrappedTemplatedEmail;
 
 class PageController extends AbstractController
 {
-    
+    protected $em;
+    protected $mailer;
+    protected $devisBg;
+
+    public function __construct(EntityManagerInterface $em, MailerInterface $mailer)
+    {
+        $this->em = $em;
+        $this->mailer = $mailer;
+        $this->devisBg = [
+                            0 => '21.jpg', 1 => '20.jpg', 2 => '19.jpg', 3 => '18.jpg', 4 => '17.jpg', 5 => '16.jpg', 
+                            6 => '14.jpg', 7 => '13.jpg', 8 => '12.jpg', 8 => '11.jpg', 9 => '10.jpg', 10 => '9.jpg'
+                        ];
+    }
+
     public function index(): Response
     {
         /*$file = "data/partners.json";
@@ -82,10 +111,12 @@ class PageController extends AbstractController
         ]);
     }
 
-    public function contact(): Response
+    public function contact(Request $request): Response
     {
         $page = 'contacts';
         $devisUrl = $this->devisBg[10];
+        //var_dump($devisUrl);die();
+
         if(!empty($request->request->get('envoyer')))
         {
             $page = 'prestations';
@@ -127,7 +158,6 @@ class PageController extends AbstractController
                 $entityManager->persist($mail);
                 $entityManager->flush();
     
-                //return $this->json(true, 200);
                 return $this->redirectToRoute('gfi-success-mail', [
                     'lang' => $lang
                 ]);
