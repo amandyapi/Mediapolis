@@ -1,6 +1,7 @@
 .navbar{
     background-color: transparent !important;
     box-shadow: none !important;
+    z-index: 1000000 !important;
 }
 
 .navbar-scroll{
@@ -12,10 +13,10 @@
     color: #fff !important;
 }
 
-/*.main-wrapper{
+.main-wrapper{
     position: relative !important;
     top:-120px !important;
-    z-index: -1000000 !important;
+    /*z-index: -1000000 !important;*/
 }
 
 .navbar-brand img{
@@ -28,4 +29,3 @@
     height: auto;
     max-height: 466px;
 }
-*/
