@@ -9,19 +9,23 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<meta name="description" content="megakit,business,company,agency,multipurpose,modern,bootstrap4">
 
-		<!-- bootstrap.min css -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.3/css/bootstrap.min.css">
-		<!-- Icon Font Css -->
+		
+		 
 		<link rel="stylesheet" href="{{ asset('assets/plugins/themify/css/themify-icons.css') }}">
+		
 		<link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome/css/all.css') }}">
+		
 		<link rel="stylesheet" href="{{ asset('assets/plugins/magnific-popup/dist/magnific-popup.css') }}">
-		<!-- Owl Carousel CSS -->
+		
 		<link rel="stylesheet" href="{{ asset('assets/plugins/slick-carousel/slick/slick.css') }}">
+		
 		<link rel="stylesheet" href="{{ asset('assets/plugins/slick-carousel/slick/slick-theme.css') }}">
-
-		<!-- Main Stylesheet -->
+		
 		<link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
-		<link rel="stylesheet" href="{{ asset('assets/css/hook.css') }}">
+		{#
+		<link rel="stylesheet" href="{{ asset('assets/css/hook.css') }}"> 
+		#}
 	</head>
 	<body>
 		<header class="navigation">
@@ -161,19 +165,6 @@
 								</ul>
 							</div>
 						</div>
-						<!--
-						                        <div class="col-lg-3 col-md-6 col-sm-6">
-						                            <div class="widget">
-						                                <h4 class="text-capitalize mb-4">Subscribe Us</h4>
-						                                <p>Subscribe to get latest news article and resources  </p>
-						
-						                                <form action="#" class="sub-form">
-						                                    <input type="text" class="form-control mb-3" placeholder="Subscribe Now ...">
-						                                    <a href="#" class="btn btn-main btn-small">subscribe</a>
-						                                </form>
-						                            </div>
-						                        </div>  
-						                        -->
 
 						<div class="col-lg-3 ml-auto col-sm-6">
 							<div class="widget">
@@ -201,13 +192,6 @@
 								</div>
 							</div>
 
-							<!--
-							                            <div class="col-lg-4 col-md-12 col-sm-12">
-							                                <div class="copyright">
-							                                Distributed by  <a href="https://themewagon.com/" target="_blank">Themewagon</a>
-							                                </div>
-							                            </div>
-							                            -->
 							<div class="col-lg-4 col-md-12 col-sm-12 text-left text-lg-left">
 								<ul class="list-inline footer-socials">
 									<li class="list-inline-item">
@@ -243,6 +227,6 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0.0/jquery.counterup.min.js" integrity="sha512-d8F1J2kyiRowBB/8/pAWsqUl0wSEOkG5KATkVV4slfblq9VRQ6MyDZVxWl2tWd+mPhuCbpTB4M7uU/x9FlgQ9Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		{% block map %}{% endblock %}
 
-		<script src="{{ asset('assets/js/script.js') }}"></script>
+		<script src="{{ asset('assets/js/script.js') }}"></script> 
 	</body>
 </html>
