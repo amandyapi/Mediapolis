@@ -104,10 +104,40 @@ class PageController extends AbstractController
         ]);
     }
 
-    public function blog(): Response
+    public function news($page): Response
     {
-        return $this->render('page/blog.html.twig', [
+        $devisUrl = $this->devisBg[7];
+        $articles = [];
+        $limit = 4;
+        $offset = ($page-1)*$limit;
+        $totalArticles = $this->getDoctrine()
+                      ->getRepository(Article::class)
+                      ->findTotalArticles('fr');
+
+        $nbPages = \ceil($totalArticles/$limit);
+        
+        $articles = $this->getDoctrine()
+                      ->getRepository(Article::class)
+                      ->customFindArticles($limit, $offset, 'fr');
+        
+        $recentArticles = $this->getDoctrine()
+                      ->getRepository(Article::class)
+                      ->findLastArticles(3);
+        /*
+        var_dump($totalArticles);
+        var_dump($nbPages);
+        var_dump($articles);
+        die();
+        */
+
+        return $this->render('page/news.html.twig', [
             'controller_name' => 'PageController',
+            'articles' => $articles,
+            'recentArticles' => $recentArticles,
+            'articles' => $articles,
+            'totalArticles' => $totalArticles,
+            'nbPages' => $nbPages,
+            'page' => $page,
         ]);
     }
 

@@ -22,14 +22,18 @@ mediapolis_offres_music_event:
 mediapolis_galerie:
     path: /galerie
     controller: App\Controller\PageController::galerie
-mediapolis_blog:
-    path: /blog
-    controller: App\Controller\PageController::blog
+mediapolis_news:
+    path: /news/{page}
+    controller: App\Controller\PageController::news
+    defaults:
+        page: 1
+    requirements:
+        page: '\d+'
 mediapolis_contact:
     path: /contact
     controller: App\Controller\PageController::contact
 mediapolis_recrutements:
-    path: /contact
+    path: /recrutements
     controller: App\Controller\PageController::recrutements
 
 

@@ -42,10 +42,10 @@ class ArticleRepository extends ServiceEntityRepository
         $result = null;
         $conn = $this->getEntityManager()->getConnection();
 
-        $sql = 'SELECT *
+        $sql = "SELECT *
                 FROM article a
                 ORDER BY a.id DESC
-                LIMIT 6';
+                LIMIT $lim";
 
         $stmt = $conn->prepare($sql);
 

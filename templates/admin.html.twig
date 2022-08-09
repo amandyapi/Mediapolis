@@ -7,7 +7,7 @@
   <link href="{{ asset('assets/images/favicon/favicon.png') }}" rel="icon">
   
   <title>
-    {% block title %}GFI-CO|Admin{% endblock %}
+    {% block title %}MEDIAPOLIS|Admin{% endblock %}
   </title>
   
   <!--     Fonts and icons     -->
@@ -28,7 +28,7 @@
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard " target="_blank">
-        <img src="{{ asset('assets/images/logo/logo-footer.png') }}" class="navbar-brand-img h-100" alt="main_logo">
+        <img src="{{ asset('assets/images/logo/logo-1.png') }}" class="navbar-brand-img h-100" alt="main_logo">
         <span class="ms-1 font-weight-bold text-white">ADMIN</span>
       </a>
     </div>
@@ -52,6 +52,15 @@
             <span class="nav-link-text ms-1">Articles</span>
           </a>
         </li>
+
+        <li id="recrutements_lnk" class="nav-item">
+          <a class="nav-link text-white" href="#">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">list</i>
+            </div>
+            <span class="nav-link-text ms-1">Recrutements</span>
+          </a>
+        </li>
         
       </ul>
     </div>
@@ -70,7 +79,7 @@
       <div class="container-fluid py-1 px-3">
          
         <nav aria-label="breadcrumb">
-          <h6 class="font-weight-bolder mb-0">GFI-CO ADMIN</h6>
+          <h6 class="font-weight-bolder mb-0">MEDIAPOLIS GROUP ADMIN</h6>
         </nav> 
         
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
@@ -159,10 +168,12 @@
         let mails = pathname.search('/admin/mails');
         let news = pathname.search('/admin/news');
         let devis = pathname.search('/devis/list');
+        let recrutements = pathname.search('/recrutements/list');
 
         var dash = $('#dash_lnk a');
         var articles = $('#news_lnk a');
         var dev = $('#devis_lnk a');
+        var recr = $('#recrutements_lnk a');
 
         console.log('mails', mails);
         console.log('news', news);
@@ -181,6 +192,7 @@
           console.log('Mails');
           dash.removeClass('active');
           dev.removeClass('active');
+          recr.removeClass('active');
           articles.addClass('active');
         } 
         else if(devis != -1)
@@ -189,7 +201,17 @@
           console.log('Devis');
           dash.removeClass('active');
           articles.removeClass('active');
+          recr.removeClass('active');
           dev.addClass('active');
+        } 
+        else if(recrutements != -1)
+        {
+          //console.clear();
+          console.log('Recrutement');
+          dash.removeClass('active');
+          articles.removeClass('active');
+          dev.removeClass('active');
+          recr.addClass('active');
         } 
     });
   </script>
